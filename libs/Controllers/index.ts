@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import MongoDB from '../Repositories/MongoDB';
+import MongoDB from '../MongoDB';
 import { Show } from '../Interfaces';
 
 let getShows: () => Promise<Show[]>;
@@ -9,7 +9,7 @@ let getShows: () => Promise<Show[]>;
   getShows = mongoMethods.getShows;
 })();
 
-export let root = (req: Request, res: Response) => res.send('Hello');
+export let root = (req: Request, res: Response) => res.send('TV Maze Cache');
 
 export let shows = async (req: Request, res: Response) => {
   const shows = await getShows();

@@ -1,10 +1,10 @@
 {
-  "name": "scrape",
+  "name": "tvmcache",
   "version": "0.1.0",
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "scrape": "npx ts-node scraper.ts",
+    "scraper": "npx ts-node scraper.ts",
     "start": "npx ts-node server.ts",
     "lint": "npx tslint  --project ."
   },
