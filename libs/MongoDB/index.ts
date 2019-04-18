@@ -9,8 +9,8 @@ export default async () => {
   const dbClient = await MongoClient.connect(mongodbURL, { useNewUrlParser: true });
   const showCollection = await dbClient.db(dbName).collection('Shows');
 
-  const saveShow = async (show: Show) =>
-    showCollection.insertOne(Object.assign(show, { _id: show.id }));
+  const saveShow = async ({ id, name, cast }: Show) =>
+    showCollection.insertOne({ _id: id, id, name, cast }); // tslint:disable-line
 
   const getLastShowId = async (): Promise<number> => {
     const [lastShow] = await showCollection.find().sort({ _id: -1 }).limit(1).toArray();
@@ -20,10 +20,9 @@ export default async () => {
     return 0;
   };
 
-  const getShows = async (): Promise<Show[]> => {
-    console.log('rana');
-    return showCollection.find().sort({ _id: -1 }).limit(5).toArray();
-  };
+  const getShows = async (skip: number, limit: number): Promise<Show[]> =>
+    showCollection.find().skip(skip).limit(limit).project({ _id: 0 }).toArray();
+
   return {
     saveShow,
     getLastShowId,
