@@ -18,10 +18,10 @@ export let shows = async (req: Request, res: Response) => {
 
   const skip = page * PAGE_SIZE;
   const limit = PAGE_SIZE;
-
   try {
     const shows = await getShows(skip, limit);
     return res.json(shows);
+
   } catch (error) {
     console.log(error);
     return res.json([]);
